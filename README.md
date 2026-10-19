@@ -2,6 +2,8 @@
 
 Built by Shrashansh Dixit (shrashansh.dixit@gmail.com).
 
+**Live demo:** https://poc-1-cars24.vercel.app/
+
 A seller photographs the car before Cars24 sends an inspector. A set of agents checks the photos with an
 OpenAI vision model, reconciles the findings with the RC, and narrows a real price reference. The inspector
 then arrives with a checklist instead of a blank car.
@@ -113,6 +115,9 @@ static/                 web UI (HTML, CSS, JavaScript; no build step)
 ```
 
 ## Deploy on Vercel
+
+The live demo at https://poc-1-cars24.vercel.app/ is deployed this way.
+
 
 1. On vercel.com choose **Add New → Project** and import this repository. Keep the detected settings; `app.py` is the entry point and `requirements.txt` is installed automatically.
 2. Under **Settings → Environment Variables** add `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`), then deploy.
