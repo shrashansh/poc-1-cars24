@@ -119,17 +119,45 @@ function renderSlots() {
   }
 }
 
+// ---------------- upload shrinking ----------------
+// Hosts like Vercel reject request bodies over 4.5 MB, so photos are re-encoded in the browser.
+// The server downsizes to 1280 px before the AI call anyway, so nothing useful is lost.
+const UPLOAD_BUDGET = 4 * 1024 * 1024;
+const SHRINK_STEPS = [[1600, 0.85], [1280, 0.8], [1024, 0.72], [800, 0.65]];
+
+async function shrink(file, maxSide, quality) {
+  const bmp = await createImageBitmap(file); // applies EXIF orientation
+  const scale = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.round(bmp.width * scale);
+  canvas.height = Math.round(bmp.height * scale);
+  canvas.getContext("2d").drawImage(bmp, 0, 0, canvas.width, canvas.height);
+  bmp.close();
+  const blob = await new Promise((ok) => canvas.toBlob(ok, "image/jpeg", quality));
+  if (!blob) throw new Error("Could not process " + file.name);
+  return blob;
+}
+
+async function shrinkUploads(uploads) {
+  for (const [side, q] of SHRINK_STEPS) {
+    const blobs = await Promise.all(uploads.map(([, f]) => shrink(f, side, q)));
+    if (blobs.reduce((n, b) => n + b.size, 0) <= UPLOAD_BUDGET) return blobs;
+  }
+  throw new Error("Photos are too large to upload together. Try fewer photos.");
+}
+
 // ---------------- run ----------------
 async function run(ev) {
   ev.preventDefault();
   const err = $("#formError");
   err.hidden = true;
   const fd = new FormData($("#form"));
+  const uploads = [];
   let count = 0;
   for (const [slot, s] of Object.entries(state.slots)) {
     if (!s) continue;
     count++;
-    if (s.kind === "upload") fd.append("photo_" + slot, s.file, s.file.name);
+    if (s.kind === "upload") uploads.push([slot, s.file]);
     else fd.append("sample_" + slot, s.ref);
   }
   if (!count) { err.textContent = "Add at least one photo, or load the sample car."; err.hidden = false; return; }
@@ -138,8 +166,13 @@ async function run(ev) {
   $("#empty").hidden = true; $("#report").hidden = true; $("#running").hidden = false;
   const stop = animateProgress();
   try {
+    const blobs = await shrinkUploads(uploads);
+    uploads.forEach(([slot], i) => fd.append("photo_" + slot, blobs[i], slot + ".jpg"));
     const res = await fetch("/api/inspect", { method: "POST", body: fd });
-    const data = await res.json();
+    const data = await res.json().catch(() => ({
+      error: res.status === 413 ? "Upload too large. Try fewer photos." :
+        res.status === 504 ? "The inspection timed out. Try again." : `Server error (${res.status}).`,
+    }));
     if (!res.ok) throw new Error(data.error || "The server could not run the inspection.");
     renderReport(data);
   } catch (e) {

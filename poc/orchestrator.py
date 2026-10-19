@@ -20,7 +20,7 @@ def load(name: str) -> Any:
 
 def make_engine():
     if not config.openai_enabled():
-        raise ValueError("Add OPENAI_API_KEY to the .env file and restart the server.")
+        raise ValueError("Add OPENAI_API_KEY to .env (or the host's environment variables) and restart the server.")
     return OpenAIVision()
 
 

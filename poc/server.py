@@ -62,7 +62,7 @@ def samples():
 @app.post("/api/inspect")
 def api_inspect():
     if not config.openai_enabled():
-        return _error("Add OPENAI_API_KEY to the .env file and restart the server.", 400)
+        return _error("Add OPENAI_API_KEY to .env (or the host's environment variables) and restart the server.", 400)
     form = request.form
     vehicles = load("vehicles.json")
     try:

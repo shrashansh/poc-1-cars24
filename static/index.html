@@ -44,7 +44,7 @@
         <p class="hint">Sample photos are real. Tap any slot to use your own photo instead (JPEG, PNG or WebP). Empty slots are skipped.</p>
         <div id="slots" class="slots"></div>
 
-        <p id="keyNotice" class="callout bad" hidden>OpenAI key missing. Add <code>OPENAI_API_KEY</code> to the <code>.env</code> file in the project folder and restart the server.</p>
+        <p id="keyNotice" class="callout bad" hidden>OpenAI key missing. Add <code>OPENAI_API_KEY</code> to the <code>.env</code> file and restart the server (on Vercel: add it under Settings → Environment Variables and redeploy).</p>
         <button id="run" class="btn" type="submit">Run pre-inspection</button>
         <p id="formError" class="error" role="alert" hidden></p>
       </form>

@@ -111,3 +111,11 @@ poc/agents/             one module per agent
 poc/data/               real sample photos, RC record, price references, catalogue
 static/                 web UI (HTML, CSS, JavaScript; no build step)
 ```
+
+## Deploy on Vercel
+
+1. On vercel.com choose **Add New → Project** and import this repository. Keep the detected settings; `app.py` is the entry point and `requirements.txt` is installed automatically.
+2. Under **Settings → Environment Variables** add `OPENAI_API_KEY` (and optionally `OPENAI_MODEL`), then deploy.
+3. Open `/api/health` on your deployment; it should show `"openai_ready": true`.
+
+Vercel limits a request to 4.5 MB, so the browser re-encodes uploaded photos to JPEG (1600 px, smaller if needed) before sending them. The deployed site uses your OpenAI key for every visitor; turn on Deployment Protection or set a spend limit on the key.
