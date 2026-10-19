@@ -1,0 +1,85 @@
+{
+  "_note": "Variant guides are simplified feature descriptions used in the AI prompt. In production they come from Cars24's catalogue.",
+  "km_bands": [
+    [
+      0,
+      10000
+    ],
+    [
+      10000,
+      20000
+    ],
+    [
+      20000,
+      30000
+    ],
+    [
+      30000,
+      40000
+    ],
+    [
+      40000,
+      50000
+    ],
+    [
+      50000,
+      60000
+    ],
+    [
+      60000,
+      70000
+    ],
+    [
+      70000,
+      80000
+    ],
+    [
+      80000,
+      90000
+    ],
+    [
+      90000,
+      100000
+    ],
+    [
+      100000,
+      125000
+    ],
+    [
+      125000,
+      150000
+    ]
+  ],
+  "models": {
+    "tata_nexon": {
+      "label": "Tata Nexon (diesel)",
+      "years": [
+        2023,
+        2024,
+        2025
+      ],
+      "variants": {
+        "Smart": "Steel wheels without covers; analogue instrument cluster; no touchscreen",
+        "Pure": "Steel wheels with covers; 7-inch touchscreen; analogue cluster",
+        "Creative": "16-inch alloy wheels; 10.25-inch touchscreen; digital instrument cluster",
+        "Creative+ Dark": "All-black exterior with black alloy wheels; '#DARK' embroidered headrests; 10.25-inch touchscreen; digital cluster; RC classification often reads 'CRTV + DK'",
+        "Fearless+": "Diamond-cut alloy wheels; 12.3-inch touchscreen; ventilated seats; 360-degree camera"
+      }
+    },
+    "maruti_swift": {
+      "label": "Maruti Suzuki Swift",
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "variants": {
+        "LXI": "Black steel wheels without covers; no music system; black door handles; halogen headlamps",
+        "VXI": "Steel wheels with full silver wheel covers; 2-DIN audio unit; body-coloured door handles",
+        "ZXI": "15-inch silver alloy wheels; 2-DIN audio unit; rear 'ZXI' badge",
+        "ZXI+": "Two-tone diamond-cut alloy wheels; 7-inch touchscreen; LED projector headlamps"
+      }
+    }
+  }
+}

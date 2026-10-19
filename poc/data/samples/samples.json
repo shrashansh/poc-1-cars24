@@ -1,0 +1,32 @@
+{
+  "_note": "Real phone photos of the author's car. Metadata stripped; RC personal fields redacted.",
+  "cars": [
+    {
+      "id": "nexon",
+      "title": "Real Nexon · author's car",
+      "story": "2024 Tata Nexon Creative+ Dark diesel, photographed at home on a phone: 7 car photos and the RC. No service record or tyre close-up, as many sellers would upload.",
+      "declared": {
+        "rc_number": "UP 78 HS 3132",
+        "model_id": "tata_nexon",
+        "year": 2024,
+        "variant": "Creative+ Dark",
+        "km_band_index": 4
+      },
+      "photos": {
+        "front": "nexon/front.jpg",
+        "rear": "nexon/rear.jpg",
+        "left": "nexon/left.jpg",
+        "right": "nexon/right.jpg",
+        "dash": "nexon/dash.jpg",
+        "interior": "nexon/interior.jpg",
+        "seats": "nexon/seats.jpg",
+        "rc": "nexon/rc.jpg"
+      },
+      "alternates": {
+        "front": "nexon/front_left.jpg",
+        "rear": "nexon/rear_right.jpg",
+        "dash": "nexon/dash_night.jpg"
+      }
+    }
+  ]
+}

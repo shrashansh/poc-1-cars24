@@ -1,0 +1,34 @@
+{
+  "_note": "Real price references only. Add a car here when a real quote exists for it; without one, the pricing step reports the findings but no rupee band.",
+  "tata_nexon": {
+    "2024": {
+      "Creative+ Dark": {
+        "low": 705000,
+        "high": 775000,
+        "km": null,
+        "source": "Post-inspection offers for the author's 2024 Nexon Creative+ Dark diesel (UP78HS3132): Cars24 ₹7,05,000, Spinny ₹7,75,000."
+      }
+    }
+  },
+  "maruti_swift": {
+    "2019": {
+      "VXI": {
+        "low": 361372,
+        "high": 399545,
+        "km": 45000,
+        "source": "Live cars24.com online estimate, 2019 Swift VXI petrol manual, Delhi DL-03, 40,000–50,000 km, 18 Oct 2026."
+      }
+    }
+  },
+  "km_rate_per_km": 0.8194,
+  "_km_rate_source": "Derived from two live cars24.com estimates for the same 2019 Swift VXI: 40–50k km (₹3,61,372–₹3,99,545) vs 1.25–1.5 lakh km (₹2,85,575–₹3,27,321).",
+  "band_rules": {
+    "_note": "Tunable parameters of the method, not data. To be calibrated on Cars24's estimate-vs-final outcomes.",
+    "narrow_variant_verified": 0.8,
+    "narrow_odometer_verified": 0.8,
+    "narrow_exterior_coverage": 0.75,
+    "narrow_service_regular": 0.85,
+    "floor_pct": 0.03,
+    "widen_on_rollback": 1.25
+  }
+}

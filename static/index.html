@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pre-Inspection AI · Cars24 POC</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">PI</span>
+        <div>
+          <strong>Pre-Inspection AI</strong>
+          <span class="muted">Proof of concept for Cars24 · by Shrashansh Dixit</span>
+        </div>
+      </div>
+      <span id="modePill" class="pill">Checking…</span>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <!-- LEFT: seller side -->
+    <section class="panel" aria-labelledby="seller-h">
+      <h2 id="seller-h">Seller side</h2>
+
+      <div class="block">
+        <h3>Start with the sample car</h3>
+        <div id="samples" class="samples"></div>
+      </div>
+
+      <form id="form" class="block" novalidate>
+        <h3>Car details the seller declares</h3>
+        <div class="grid2">
+          <label>RC number<input id="rc" name="rc_number" placeholder="e.g. UP 78 HS 3132" autocomplete="off"></label>
+          <label>Model<select id="model" name="model_id"></select></label>
+          <label>Year<select id="year" name="year"></select></label>
+          <label>Variant<select id="variant" name="declared_variant"></select></label>
+          <label class="span2">Km driven (today's dropdown)<select id="kmband" name="km_band_index"></select></label>
+        </div>
+
+        <h3>Photos</h3>
+        <p class="hint">Sample photos are real. Tap any slot to use your own photo instead (JPEG, PNG or WebP). Empty slots are skipped.</p>
+        <div id="slots" class="slots"></div>
+
+        <p id="keyNotice" class="callout bad" hidden>OpenAI key missing. Add <code>OPENAI_API_KEY</code> to the <code>.env</code> file in the project folder and restart the server.</p>
+        <button id="run" class="btn" type="submit">Run pre-inspection</button>
+        <p id="formError" class="error" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <!-- RIGHT: results -->
+    <section class="panel results" aria-labelledby="res-h" aria-live="polite">
+      <h2 id="res-h">What Cars24 knows before sending an inspector</h2>
+      <div id="empty" class="empty">
+        <p>Pick a sample car or add photos, then run the pre-inspection.</p>
+        <ol class="pipeline-preview">
+          <li>Capture QA checks each photo on the server (blur, light, resolution)</li>
+          <li>Identity, variant, odometer, damage and document agents run in parallel</li>
+          <li>Cross-check reconciles their findings with the RC</li>
+          <li>Pricing narrows a real price reference using what was verified</li>
+          <li>Explainer writes the seller message and inspector checklist</li>
+        </ol>
+      </div>
+      <div id="running" hidden>
+        <ol id="progress" class="progress"></ol>
+      </div>
+      <div id="report" hidden></div>
+    </section>
+  </main>
+
+  <template id="slotTpl">
+    <div class="slot">
+      <label class="slot-drop">
+        <input type="file" accept="image/jpeg,image/png,image/webp">
+        <img alt="">
+        <span class="slot-empty">+ Add photo</span>
+      </label>
+      <div class="slot-foot">
+        <span class="slot-name"></span>
+        <span class="slot-src"></span>
+        <button type="button" class="link slot-clear">Clear</button>
+      </div>
+    </div>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
