@@ -116,4 +116,4 @@ static/                 web UI (HTML, CSS, JavaScript; no build step)
 
 ## Live on Vercel
 
-The live demo at https://poc-1-cars24.vercel.app/ is deployed this way.
+The live demo at https://poc-1-cars24.vercel.app/ is deployed.
